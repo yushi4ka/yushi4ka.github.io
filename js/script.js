@@ -50,7 +50,7 @@ const projects = [
     {
         name: 'SakuraChat',
         ico: './img/SakuraChat.png',
-        download: 'https://modrinth.com/user/yushi4ka',
+        download: 'https://modrinth.com/plugin/sakurachat',
         update: [
             '+ Add Messages above players',
             '+ Add Custom Emoji'
@@ -59,7 +59,7 @@ const projects = [
     {
         name: 'SakuraHeads',
         ico: './img/SakuraHeads.png',
-        download: 'https://modrinth.com/user/yushi4ka',
+        download: 'https://modrinth.com/plugin/sakuraheads',
         update: [
             '+ Fix /sheads reload'
         ]
