@@ -3,13 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
-    <title>yushi4ka</title>
+    <title>yushi4ka portfolio</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link href="css/index.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <div class="main">
-        <h1 class="title">yushi4ka</h1>
-        <p class="text">test.</p>
-    </div>
+    <nav id="navbar">
+        <div class="container">
+            <a href="https://github.com/yushi4ka/yushi4ka.github.io" class="logo">yushi4ka.github.io</a>
+            <ul>
+                <li><a href="#" id="about-link" onclick="switchPage('about')" class="active">About</a></li>
+                <li><a href="#" id="projects-link" onclick="switchPage('projects')">Projects</a></li>
+                <li><a href="#" class="theme-switch">Dark Mode</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <section id="about" class="section active">
+            <div class="container">
+                <div class="about-content">
+                    <img src="img/yushi4ka.png" alt="Yushi4ka" class="about-avatar">
+                    <div class="about-info">
+                        <h2>About Me</h2>
+                        <p>
+                            Пример меня зовут Юшико мне 16 лет. Я пишу плагины и делаю сервера в Minecraft!
+                            Начал я свой путь в далёком 2016 и по сей день стараюсь создавать что то новое
+                            Чтобы развивать комьюнити Minecraft в сфере Плагинов, Ресурспаков, Серверов.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="projects" class="section">
+            <div class="container">
+                <div id="project-list">
+                    <h2 class="projects-title">Projects</h2>
+
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="js/script.js"></script>
 </body>
 </html>
