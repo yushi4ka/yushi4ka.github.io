@@ -86,7 +86,7 @@
     <span id="color-red">private static</span> String langFile;
 
     <span id="color-red">public static void</span> <span id="color-purple">init</span>(Plugin plugin) {
-        <span id="color-red">FileConfiguration</span> <span id="color-blue">config =</span> plugin.getPlugin().getConfig();
+        <span id="color-red">FileConfiguration</span> <span id="color-blue">config =</span> НазваниеВашегоПлагина.getPlugin().getConfig();
         langFile = config.getString(<span id="color-lightblue">"lang"</span>);
         <span id="color-red">InputStream</span> <span id="color-blue">inputStream</span> = plugin.getResource(<span id="color-lightblue">"langs/"</span> + langFile);
         langConfig = YamlConfiguration.loadConfiguration(<span id="color-red">new</span> <span id="color-purple">InputStreamReader</span>(inputStream));
