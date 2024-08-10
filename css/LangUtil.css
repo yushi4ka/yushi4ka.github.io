@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+nav {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+}
+
+li {
+    margin-left: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #b300ff;
+}
+
+.section {
+    padding: 20px 0;
+}
+
+h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Dark Mode */
+.dark-mode {
+    background-color: #222;
+    color: #fff;
+}
+
+.dark-mode nav {
+    background-color: #333;
+}
+
+.dark-mode a {
+    color: #fff;
+}
+
+.dark-mode a:hover {
+    color: #b300ff;
+}
+
+.dark-mode .education-container {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-mode #education-read {
+    color: #b300ff;
+    background-color: #fff;
+}
+
+.dark-mode #education-read:hover {
+    background-color: #ccc;
+}
+
+.dark-mode #education-ico {
+    filter: invert(0);
+}
+
+#education-ico {
+    border-radius: 50%;
+    filter: invert(1);
+}
+
+/* Education code Styles */
+
+code {
+    background: none repeat scroll 0 0 #dedede;
+    border-left: 5px solid #bbb;
+    display: block;
+    padding: 5px 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode code {
+    background: none repeat scroll 0 0 #2a2a2a;
+    border-left: 5px solid #5e5e5e;
+}
+
+#education-code-content {
+    padding: 5px 5px;
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+  
+#education-code-file-name {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.dark-mode #education-code-content {
+    background-color: #333;
+    border-color: #444;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#education-code {
+    padding: 0;
+    margin: 0;
+    white-space: pre;
+    color: #000000;
+    margin-left: 0;
+}
+
+.dark-mode #education-code {
+    padding: 0;
+    margin: 0;
+    white-space: pre;
+    color: #ffffff;
+}
