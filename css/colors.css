@@ -1,0 +1,69 @@
+/* COLORS */
+
+#a-link-pink {
+    text-decoration: none;
+    color: #ff9afc;
+    transition: color 0.3s ease;
+}
+
+#a-link-pink:hover {
+    color: #ff53f9;
+}
+
+#color-gray {
+    color: rgb(80, 80, 80);
+}
+
+.dark-mode #color-gray {
+    color: rgb(190, 190, 190);
+}
+
+#color-red {
+    color: rgb(255, 21, 0);
+}
+
+.dark-mode #color-red {
+    color: rgb(255, 123, 114);
+}
+
+#color-gold {
+    color: rgb(255, 119, 0);
+}
+
+.dark-mode #color-gold {
+    color: rgb(255, 166, 87);
+}
+
+#color-purple {
+    color: rgb(123, 0, 255);
+}
+
+.dark-mode #color-purple {
+    color: rgb(210, 168, 255);
+}
+
+#color-blue {
+    color: rgb(0, 30, 255);
+}
+
+.dark-mode #color-blue {
+    color: rgb(121, 192, 255);
+}
+
+#color-lightblue {
+    color: rgb(0, 189, 214);
+}
+
+.dark-mode #color-lightblue {
+    color: rgb(165, 214, 255);
+}
+
+mark {
+    background-color: #b300ff;
+    color: white;
+}
+
+.dark-mode mark {
+    background-color: #b300ff;
+    color: white;
+}
