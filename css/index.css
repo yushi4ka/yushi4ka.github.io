@@ -47,7 +47,7 @@ a {
 }
 
 a:hover {
-    color: #007bff;
+    color: #b300ff;
 }
 
 .section {
@@ -80,6 +80,56 @@ p {
     font-size: 16px;
     line-height: 1.5;
 }
+
+/* Dark Mode */
+.dark-mode {
+    background-color: #222;
+    color: #fff;
+}
+
+.dark-mode nav {
+    background-color: #333;
+}
+
+.dark-mode a {
+    color: #fff;
+}
+
+.dark-mode a:hover {
+    color: #b300ff;
+}
+
+.dark-mode .project-container {
+    background-color: #333;
+    color: #ffffff;
+}
+
+.dark-mode #project-download {
+    color: #b300ff;
+    background-color: #fff;
+}
+
+.dark-mode #project-download:hover {
+    background-color: #ccc;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+    }
+
+    .about-avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    .project-container {
+        width: 100%;
+    }
+}
+
+/* Projects*/
 
 #projects {
     display: flex;
@@ -144,54 +194,6 @@ p {
     margin-bottom: 5px;
 }
 
-/* Dark Mode */
-.dark-mode {
-    background-color: #222;
-    color: #fff;
-}
-
-.dark-mode nav {
-    background-color: #333;
-}
-
-.dark-mode a {
-    color: #fff;
-}
-
-.dark-mode a:hover {
-    color: #007bff;
-}
-
-.dark-mode .project-container {
-    background-color: #333;
-    color: #fff;
-}
-
-.dark-mode #project-download {
-    color: #007bff;
-    background-color: #fff;
-}
-
-.dark-mode #project-download:hover {
-    background-color: #ccc;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .about-content {
-        flex-direction: column;
-    }
-
-    .about-avatar {
-        width: 100px;
-        height: 100px;
-    }
-
-    .project-container {
-        width: 100%;
-    }
-}
-
 /* Projects Section Styling */
 .projects-title {
     text-align: center;
@@ -234,7 +236,7 @@ p {
 /* Project Download Button Styling */
 #project-download {
     color: #fff;
-    background-color: #007bff;
+    background-color: #b300ff;
     padding: 8px 16px;
     border-radius: 4px;
     text-decoration: none;
@@ -243,7 +245,7 @@ p {
 }
 
 #project-download:hover {
-    background-color: #0056b3;
+    background-color: #8300bb;
 }
 
 /* Project Update Styling */
