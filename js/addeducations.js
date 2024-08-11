@@ -17,7 +17,7 @@ const education = [
     {
         name: 'LangUtil.java',
         ico: './img/LangUtil.png',
-        read: 'education/LangUtil.html',
+        read: './LangUtil.html',
         update: [
             'Информация о том как сделать локализацию для своего плагина.',
         ]
