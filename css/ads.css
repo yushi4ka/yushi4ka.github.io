@@ -1,0 +1,49 @@
+#ads-content {
+    position: fixed;
+    top: 5px;
+    left: 35%;
+    transform: translateY(0);
+    z-index: 1000;
+}
+
+#ads-content section {
+    width: 400px;
+    height: 90px;
+    background-color: #cecece;
+    padding: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+#ads-content section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: invert(0);
+}
+
+/* DARK-MODE */
+
+.dark-mode #ads-content {
+    position: fixed;
+    top: 5px;
+    left: 35%;
+    transform: translateY(0);
+    z-index: 1000;
+}
+
+.dark-mode #ads-content section {
+    width: 400px;
+    height: 90px;
+    background-color: #252525;
+    padding: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.dark-mode #ads-content section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: invert(1);
+}
