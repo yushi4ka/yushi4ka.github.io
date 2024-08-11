@@ -9,45 +9,13 @@ body {
     background-color: #f5f5f5;
     color: #333;
     transition: background-color 0.3s ease;
+    overflow-x: hidden;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-}
-
-nav {
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 10px 0;
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    text-decoration: none;
-}
-
-ul {
-    list-style: none;
-    display: flex;
-    justify-content: flex-end;
-}
-
-li {
-    margin-left: 20px;
-}
-
-a {
-    text-decoration: none;
-    color: #333;
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: #b300ff;
 }
 
 .section {
@@ -61,24 +29,14 @@ a:hover {
     gap: 40px;
 }
 
+.about-info h2 {
+    text-align: start;
+}
+
 .about-avatar {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-}
-
-.about-info {
-    text-align: center;
-}
-
-h2 {
-    font-size: 32px;
-    margin-bottom: 10px;
-}
-
-p {
-    font-size: 16px;
-    line-height: 1.5;
 }
 
 /* Dark Mode */
@@ -167,7 +125,7 @@ p {
 
 #project-download {
     color: #fff;
-    background-color: #007bff;
+    background-color: #b300ff;
     padding: 8px 16px;
     border-radius: 4px;
     text-decoration: none;
@@ -175,7 +133,7 @@ p {
 }
 
 #project-download:hover {
-    background-color: #0056b3;
+    background-color: #8300bb;
 }
 
 #project-update {
