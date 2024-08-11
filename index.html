@@ -6,6 +6,10 @@
     <meta name="keywords" content="yushi4ka юшико юша вьюшка Yushi4ka Юшико Юша Вьюшка Юшико Киров Yushiko Kirov yushiko kirov yushi4ka kirov Юшичка Киров">
     <title>yushi4ka - Portfolio</title>
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="css/ads.css">
     <link rel="icon" type="image/x-icon" href="site.ico">
     <link href="css/index.css" rel="stylesheet" type="text/css" />
 </head>
@@ -13,20 +17,27 @@
     <nav id="navbar">
         <div class="container">
             <a href="https://github.com/yushi4ka/yushi4ka.github.io" class="logo">yushi4ka.github.io</a>
+            
+            <div id="ads-content">
+                <section id="ads-imgs"></section>
+            </div>
+
             <ul>
                 <li><a href="https://yushi4ka.github.io/" id="main-link" onclick="switchPage('main')" class="active">Main</a></li>
-                <li><a href="education.html" id="education-link" onclick="switchPage('education')">Education</a></li>
+                <li><a href="education.html" id="educations-link" onclick="switchPage('education')">Education</a></li>
                 <li><a href="#" class="theme-switch">Dark Mode</a></li>
             </ul>
         </div>
     </nav>
+    <br></br>
+    <br></br>
     <main>
         <section id="about" class="section active">
             <div class="container">
                 <div class="about-content">
                     <img src="img/yushi4ka.png" alt="Yushi4ka" class="about-avatar">
                     <div class="about-info">
-                        <h2>About Me</h2>
+                        <h2 class="about-info">About Me</h2>
                         <p>
                             Пример меня зовут Юшико мне 16 лет. Я пишу плагины и делаю сервера в Minecraft!
                             Начал я свой путь в далёком 2016 и по сей день стараюсь создавать что то новое
@@ -47,5 +58,11 @@
     </main>
     <script src="js/themeswitching.js"></script>
     <script src="js/addprojects.js"></script>
+    <script src="js/ads.js"></script>
 </body>
+<footer id="footer">
+    <div class="footer-container" id="footer-container">
+        <p id="footer-text">By yushi4ka</p>
+    </div>
+</footer>
 </html>
