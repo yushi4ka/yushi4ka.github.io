@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="yushi4ka юшико юша вьюшка Yushi4ka Юшико Юша Вьюшка Юшико Киров Yushiko Kirov yushiko kirov yushi4ka kirov Юшичка Киров">
+    <title>yushi4ka - Education: LangUtil</title>
+    <link rel="stylesheet" href="css/LangUtil.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="css/ads.css">
+    <link rel="icon" type="image/x-icon" href="site.ico">
+    <link href="css/LangUtil.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <nav id="navbar">
+        <div class="container">
+            <a href="https://github.com/yushi4ka/yushi4ka.github.io" class="logo">yushi4ka.github.io</a>
+            
+            <div id="ads-content">
+                <section id="ads-imgs"></section>
+            </div>
+
+            <ul>
+                <li><a href="https://yushi4ka.github.io/" id="main-link" onclick="switchPage('main')" class="active">Main</a></li>
+                <li><a href="education.html" id="education-link" onclick="switchPage('education')">Education</a></li>
+                <li><a href="#" class="theme-switch">Dark Mode</a></li>
+            </ul>
+        </div>
+    </nav>
+    <br></br>
+    <br></br>
+    <main>
+        <section id="education-info" class="section active">
+            <div class="container">
+                <div class="education-content">
+                    <img src="img/LangUtil.png" alt="LangUtil" id="education-ico">
+                    <h2 id="education-title">LangUtil</h2>
+                    <p>
+                        Информация о том как сделать локализацию для своего плагина.
+                    </p>
+                    <div>
+                        <br></br>
+                        <h3>1. Начало</h3>
+                        <br></br>
+                        <p id="education-text">
+                            Для начала добавьте в ваш <mark><strong>config.yml</strong></mark> данный код:
+                        </p>
+                        <div id="education-code-content">
+                            <h4 id="education-code-file-name">config.yml</h4>
+                            <pre>
+                                <code id="education-code">
+<span id="color-blue">lang:</span> <span id="color-lightblue">en.yml</span> <span id="color-gray"># Или же ru.yml, или любой другой язык. ОБЯЗАТЕЛЬНО УКАЗЫВАЙТЕ .yml В КОНЦЕ!</span>
+                                </code>
+                            </pre>
+                        </div>
+                        <p id="education-text">
+                            Чтош теперь давайте создадим в папке <mark><strong>src/main/resources</strong></mark> папку <mark><strong>langs</strong></mark> где будут находиться наши файлы локализации. Теперь добавим в папку <mark><strong>ru.yml</strong></mark> и <mark><strong>en.yml</strong></mark>
+                        </p>
+                        <div id="education-code-content">
+                            <h4 id="education-code-file-name">ru.yml</h4>
+                            <pre>
+                                <code id="education-code">
+<span id="color-blue">test1:</span> <span id="color-lightblue">"Тестовое сообщение! 1"</span>
+<span id="color-blue">test2:</span>
+    <span id="color-lightblue">"Тестовое сообщение! 2"</span>
+<span id="color-gray"># У вас могут быть другие сообщения но я советую для начала сделать тестовые сообщения для проверки работы.</span>
+                                </code>
+                            </pre>
+                        </div>
+                        <br></br>
+                        <div id="education-code-content">
+                            <h4 id="education-code-file-name">en.yml</h4>
+                            <pre>
+                                <code id="education-code">
+<span id="color-blue">test1:</span> <span id="color-lightblue">"Test message! 1"</span>
+<span id="color-blue">test2:</span>
+    <span id="color-lightblue">"Test message! 2"</span>
+<span id="color-gray"># У вас могут быть другие сообщения но я советую для начала сделать тестовые сообщения для проверки работы.</span>
+                                </code>
+                            </pre>
+                        </div>
+                        <br></br>
+                        <h3>2. Добавление</h3>
+                        <br></br>
+                        <p id="education-text">
+                            Cоздайте в своём плагине папку <mark><strong>Util</strong></mark> и создайте в данной папке <mark><strong>LangUtil.java</strong></mark> после этого вставьте код:
+                        </p>
+                        <div id="education-code-content">
+                            <h4 id="education-code-file-name">LangUtil.java</h4>
+                            <pre>
+                                <code id="education-code">
+<span id="color-red">public class</span> <span id="color-purple">LangUtil</span> {
+    <span id="color-red">private static</span> YamlConfiguration langConfig;
+    <span id="color-red">private static</span> String langFile;
+
+    <span id="color-red">public static void</span> <span id="color-purple">init</span>(Plugin plugin) {
+        <span id="color-red">FileConfiguration</span> <span id="color-blue">config =</span> НазваниеВашегоПлагина.getPlugin().getConfig();
+        langFile = config.getString(<span id="color-lightblue">"lang"</span>);
+        <span id="color-red">InputStream</span> <span id="color-blue">inputStream</span> = plugin.getResource(<span id="color-lightblue">"langs/"</span> + langFile);
+        langConfig = YamlConfiguration.loadConfiguration(<span id="color-red">new</span> <span id="color-purple">InputStreamReader</span>(inputStream));
+    }
+
+    <span id="color-red">public static</span> String <span id="color-purple">message</span>(String key) {
+        <span id="color-red">return</span> langConfig.getString(key, <span id="color-lightblue">"Message not found"</span>);
+    }
+
+    <span id="color-red">public static void</span> <span id="color-purple">reloadMessages</span>(Plugin plugin) {
+        <span id="color-red">File</span> <span id="color-blue">file =</span> <span id="color-red">new</span> <span id="color-purple">File</span>(plugin.getDataFolder(), <span id="color-lightblue">"langs/"</span> + langFile);
+        langConfig = YamlConfiguration.loadConfiguration(file);
+    }
+}
+                                </code>
+                            </pre>
+                        </div>
+                        <br></br>
+                        <h3>3. Подключение</h3>
+                        <br></br>
+                        <p id="education-text">
+                            Добавьте в ваш главный файл данный код:
+                        </p>
+                        <div id="education-code-content">
+                            <h4 id="education-code-file-name">PluginName.java</h4>
+                            <pre>
+                                <code id="education-code">
+<span id="color-red">import</span> org.winterdev.НазваниеПлагина.Util.LangUtil;
+                                </code>
+
+                                <code id="education-code">
+        inputStream = <span id="color-gold">this</span>.getResource(<span id="color-lightblue">"langs/ru.yml"</span>);
+        <span id="color-gold">this</span>.messagesRUConfig = YamlConfiguration.loadConfiguration(<span id="color-red">new</span> <span id="color-purple">InputStreamReader</span>(inputStream));
+        saveMessagesRUConfig();
+        inputStream = <span id="color-gold">this</span>.getResource(<span id="color-lightblue">"langs/en.yml"</span>);
+        <span id="color-gold">this</span>.messagesENConfig = YamlConfiguration.loadConfiguration(<span id="color-red">new</span> <span id="color-purple">InputStreamReader</span>(inputStream));
+        saveMessagesENConfig();
+
+        LangUtil.init(<span id="color-gold">this</span>);
+
+    <span id="color-red">public void</span> <span id="color-purple">saveMessagesRUConfig</span>() {
+        <span id="color-red">try</span> {
+            <span id="color-gold">this</span>.messagesRUConfig.save(String.valueOf(<span id="color-gold">this</span>.getDataFolder()) + <span id="color-lightblue">"/langs/ru.yml"</span>);
+        } <span id="color-red">catch</span> (Exception var2) {
+            <span id="color-red">Exception</span> <span id="color-blue">e =</span> var2;
+            <span id="color-gold">this</span>.getLogger().severe(<span id="color-lightblue">"Error saving ru.yml: "</span> + e.getMessage());
+        }
+    }
+
+    <span id="color-red">public void</span> <span id="color-purple">saveMessagesENConfig</span>() {
+        <span id="color-red">try</span> {
+            <span id="color-gold">this</span>.messagesENConfig.save(String.valueOf(<span id="color-gold">this</span>.getDataFolder()) + <span id="color-lightblue">"/langs/en.yml"</span>);
+        } <span id="color-red">catch</span> (Exception var2) {
+            <span id="color-red">Exception</span> e = var2;
+            <span id="color-gold">this</span>.getLogger().severe(<span id="color-lightblue">"Error saving en.yml: "</span> + e.getMessage());
+        }
+    }
+                                </code>
+                            </pre>
+                        </div>
+                        <br></br>
+                        <h3>4. Проверка</h3>
+                        <br></br>
+                        <p id="education-text">
+                            Давайте же напишем проверку на то работает смена языка или же нет! Создадим тестовую команду.
+                        </p>
+                        <div id="education-code-content">
+                            <h4 id="education-code-file-name">TestCommand.java</h4>
+                            <pre>
+                                <code id="education-code">
+<string id="color-red">import</string> org.НазваниеОрганизации.НазваниеПлагина.Util.LangUtil;
+                                </code>
+                                <code id="education-code">
+<span id="color-red">String</span> <span id="color-blue">message =</span> LangUtil.message("test1");
+player.sendMessage(ColorUtil.color(<span id="color-lightblue">message</span>));
+                                </code>
+                            </pre>
+                        </div>
+                        <p id="education-text">
+                            Теперь когда вы будете писать <mark><strong>LangUtil.message("test1");</strong></mark> плагин будет выводить: <mark><strong>Тестовок сообщение! 1</strong></mark> или же <mark><strong>Test message! 1</strong></mark>
+                        </p>
+                        <br></br>
+                        <h3>5. Конец</h3>
+                        <br></br>
+                        <p id="education-text">
+                            Больше информации о LangUtil вы можеет посмотреть на <strong>GitHub</strong> моего проекта <a id="a-link-pink" href="https://github.com/yushi4ka/SakuraChat"><strong>SakuraChat</strong></a>.
+                        </p>     
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="js/themeswitching.js"></script>
+    <script src="js/ads.js"></script>
+</body>
+<footer>
+    <div class="footer-container">
+        <p id="footer-text">By yushi4ka</p>
+    </div>
+</footer>
+</html>
