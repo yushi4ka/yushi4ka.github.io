@@ -3,7 +3,7 @@
 @import url("https://mwittrien.github.io/BetterDiscordAddons/Themes/EmojiReplace/base/Apple.css");
 
 :root {
-  --background: url("https://so1ta.github.io/Images/USP.jpg");
+  --background:                 #black;
   --font:                       "Inter";
   --transparencyalpha:          0.5;
   --transparencycolor:          0,0,0;
