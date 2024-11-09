@@ -1,4 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap");
 @import url("https://discordstyles.github.io/SoftX/RadialGlow.css");
+@import url("https://discordstyles.github.io/SoftX/VerticalUserArea.css"); 
+@import url("https://discordstyles.github.io/Addons/windows-titlebar.css");
+@import url("https://mwittrien.github.io/BetterDiscordAddons/Themes/BasicBackground/BasicBackground.theme.css");
 
 :root {
   --background: url("https://so1ta.github.io/Images/USP.jpg");
@@ -15,10 +19,10 @@
 .theme-dark {
   --text-normal:                #ffffff;
   --text-muted:                 #ffffff;
-  --header-primary:             #cd4fff;
+  --header-primary:             #ffffff;
   --channels-default:           #ffffff;
-  --header-secondary:           #d66fff;
-  --interactive-normal:         #d66fff;
+  --header-secondary:           #ffffff;
+  --interactive-normal:         #ffffff;
   --interactive-hover:          #ffffff;
   --interactive-active:         #ffffff;
   --background-modifier-accent: #fff2;
