@@ -2,7 +2,7 @@
 @import url("https://discordstyles.github.io/SoftX/RadialGlow.css");
 
 :root {
-  --background:                 #black;
+  --background:                 #262626;
   --font:                       "Inter";
   --transparencyalpha:          0.5;
   --transparencycolor:          0,0,0;
@@ -14,13 +14,13 @@
 }
 
 .theme-dark {
-  --text-normal:                #ffffff;
-  --text-muted:                 #ffffff;
-  --header-primary:             #ffffff;
-  --channels-default:           #ffffff;
-  --header-secondary:           #ffffff;
-  --interactive-normal:         #ffffff;
-  --interactive-hover:          #ffffff;
-  --interactive-active:         #ffffff;
+  --text-normal:                lightgray;
+  --text-muted:                 lightgray;
+  --header-primary:             lightgray;
+  --channels-default:           lightgray;
+  --header-secondary:           lightgray;
+  --interactive-normal:         lightgray;
+  --interactive-hover:          lightgray;
+  --interactive-active:         lightgray;
   --background-modifier-accent: #fff2;
 }
