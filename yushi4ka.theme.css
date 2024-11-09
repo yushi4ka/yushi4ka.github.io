@@ -1,0 +1,33 @@
+/**
+ * @name yushi4ka
+ * @author yushi4ka
+ * @version 1.0.0
+ * @description Theme yushi4ka
+ * @source https://github.com/yushi4ka/yushi4ka-ThemeDiscord
+*/
+
+@import url("https://discordstyles.github.io/SoftX/RadialGlow.css");
+
+:root {
+  --background: #ffffff;
+  --font:                       "Inter";
+  --transparencyalpha:          0.5;
+  --transparencycolor:          0,0,0;
+  --messagetransparency:        0;
+  --guildchanneltransparency:   0;
+  --chatinputtransparency:      0;
+  --memberlisttransparency:     0;
+  --accentcolor:                144,0,32,0.6;
+}
+
+.theme-dark {
+  --text-normal:                #ffffff;
+  --text-muted:                 #ffffff;
+  --header-primary:             #cd4fff;
+  --channels-default:           #d66fff;
+  --header-secondary:           #d66fff;
+  --interactive-normal:         #d66fff;
+  --interactive-hover:          #ffffff;
+  --interactive-active:         #ffffff;
+  --background-modifier-accent: #fff2;
+}
