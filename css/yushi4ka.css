@@ -1,15 +1,7 @@
-/**
- * @name yushi4ka
- * @author yushi4ka
- * @version 1.0.0
- * @description Theme yushi4ka
- * @source https://github.com/yushi4ka/yushi4ka-ThemeDiscord
-*/
-
-@import url("https://discordstyles.github.io/SoftX/RadialGlow.css");
+@import url("https://yushi4ka.github.io/css/yushi4ka.css");
 
 :root {
-  --background: #ffffff;
+  --background: url("https://so1ta.github.io/Images/USP.jpg");
   --font:                       "Inter";
   --transparencyalpha:          0.5;
   --transparencycolor:          0,0,0;
