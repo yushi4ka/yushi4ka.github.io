@@ -17,7 +17,7 @@
 	--backgroundblur:		0;
 	
 	--popout:			var(--background);
-	--popoutposition:		var(--backgroundposition)			*/
+	--popoutposition:		var(--backgroundposition)
 	--popoutsize:			var(--backgroundsize);
 	--popoutblur:			var(--backgroundblur);
 	
