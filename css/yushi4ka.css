@@ -1,4 +1,4 @@
-@import url("https://yushi4ka.github.io/css/yushi4ka.css");
+@import url("https://discordstyles.github.io/SoftX/RadialGlow.css");
 
 :root {
   --background: url("https://so1ta.github.io/Images/USP.jpg");
@@ -16,6 +16,7 @@
   --text-normal:                #ffffff;
   --text-muted:                 #ffffff;
   --header-primary:             #cd4fff;
+  --channels-default:           #ffffff;
   --header-secondary:           #d66fff;
   --interactive-normal:         #d66fff;
   --interactive-hover:          #ffffff;
