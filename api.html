@@ -3,24 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orion API Test</title>
+    <title>Orion API</title>
     <script>
         function getQueryParams() {
             const params = new URLSearchParams(window.location.search);
             const command = params.get('command');
+
             if (command) {
                 console.log(`Received command: ${command}`);
-
-                if (command === "test") {
-                    const response = { success: true };
-                    document.body.innerText = JSON.stringify(response);
-                } else {
-                    const response = { success: false, message: "Команда не распознана" };
-                    document.body.innerText = JSON.stringify(response);
-                }
+                document.body.innerText = 'true';
             } else {
-                const errorResponse = { error: 'Ошибка: отсутствует параметр command' };
-                document.body.innerText = JSON.stringify(errorResponse);
+                document.body.innerText = 'false';
             }
         }
 
@@ -29,6 +22,6 @@
 </head>
 <body>
     <h1>Orion API</h1>
-    <p>Test</p>
+    <p>Обработка команд</p>
 </body>
 </html>
