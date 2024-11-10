@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orion API</title>
+</head>
+<body>
+    <h1>Orion API</h1>
+    <script>
+        async function handleRequest(command) {
+            const [gameUser ID, baseAmount] = command.split(' ');
+            if (gameUser ID && !isNaN(baseAmount) && parseInt(baseAmount) >= 50) {
+                return 'true';
+            }
+            return 'false';
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const command = urlParams.get('command');
+        if (command) {
+            handleRequest(command).then(response => {
+                document.body.innerText = response;
+            });
+        } else {
+            document.body.innerText = 'Команда не указана';
+        }
+    </script>
+</body>
+</html>
