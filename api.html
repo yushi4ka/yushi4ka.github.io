@@ -10,9 +10,12 @@
             const command = params.get('command');
             if (command) {
                 console.log(`Received command: ${command}`);
-                document.body.innerText = `Успех! ${command}`;
+                
+                const response = { message: `Успех! ${command}` };
+                document.body.innerText = JSON.stringify(response);
             } else {
-                document.body.innerText = 'Ошибка: отсутствует параметр command';
+                const errorResponse = { error: 'Ошибка: отсутствует параметр command' };
+                document.body.innerText = JSON.stringify(errorResponse);
             }
         }
 
