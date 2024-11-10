@@ -11,8 +11,13 @@
             if (command) {
                 console.log(`Received command: ${command}`);
                 
-                const response = { message: `Успех! ${command}` };
-                document.body.innerText = JSON.stringify(response);
+                if (command === "test") {
+                    const response = { success: true };
+                    document.body.innerText = JSON.stringify(response);
+                } else {
+                    const response = { success: false, message: "Команда не распознана" };
+                    document.body.innerText = JSON.stringify(response);
+                }
             } else {
                 const errorResponse = { error: 'Ошибка: отсутствует параметр command' };
                 document.body.innerText = JSON.stringify(errorResponse);
