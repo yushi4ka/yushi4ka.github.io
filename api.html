@@ -5,17 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Test</title>
     <script>
-        async function handleRequest(command) {
-            console.log(`${command}`);
-
-            const response = { success: true, message: "Команда обработана" };
-            console.log(response.message);
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            const command = params.get('command');
+            if (command) {
+                console.log(`Received command: ${command}`);
+                console.log("test");
+            }
         }
 
-        window.onload = () => {
-            const command = "test";
-            handleRequest(command);
-        };
+        window.onload = getQueryParams;
     </script>
 </head>
 <body>
