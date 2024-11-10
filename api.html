@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test API</title>
     <script>
-        function getQueryParams() {
-            const params = new URLSearchParams(window.location.search);
-            const message = params.get('message');
-
-            if (message === 'test') {
-                document.body.innerText = 'test==test';
-            } else {
-                document.body.innerText = '';
-            }
+        async function logData(data) {
+            console.log(data);
         }
 
-        window.onload = getQueryParams;
+        window.addEventListener('load', () => {
+            const url = new URL(window.location.href);
+            const message = url.searchParams.get('message');
+
+            if (message) {
+                logData(message);
+            }
+        });
     </script>
 </head>
 <body>
