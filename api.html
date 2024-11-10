@@ -10,7 +10,7 @@
             const command = params.get('command');
             if (command) {
                 console.log(`Received command: ${command}`);
-                
+
                 if (command === "test") {
                     const response = { success: true };
                     document.body.innerText = JSON.stringify(response);
