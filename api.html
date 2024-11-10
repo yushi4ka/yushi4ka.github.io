@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orion API</title>
+    <title>Test API</title>
     <script>
         function getQueryParams() {
             const params = new URLSearchParams(window.location.search);
-            const command = params.get('command');
+            const message = params.get('message');
 
-            if (command) {
-                console.log(`Received command: ${command}`);
-                document.body.innerText = 'true';
+            if (message === 'test') {
+                document.body.innerText = 'test==test';
             } else {
-                document.body.innerText = 'false';
+                document.body.innerText = '';
             }
         }
 
