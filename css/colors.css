@@ -1,0 +1,29 @@
+#color-red{
+    color: red;
+}
+#color-blue{
+    color: blue;
+}
+#color-lightblue{
+    color: #6adaff;
+}
+#color-purple{
+    color: purple;
+}
+#color-green{
+    color: green;
+}
+
+#color-white{
+    color: white;
+}
+#color-gray{
+    color: gray;
+}
+#color-black{
+    color: black;
+}
+
+mark {
+    background-color: #e1baff;
+}
