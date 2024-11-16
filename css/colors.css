@@ -26,4 +26,5 @@
 
 mark {
     background-color: #e1baff;
+    color: --text-color;
 }
