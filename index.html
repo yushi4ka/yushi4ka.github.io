@@ -6,51 +6,55 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>yushi4ka portfolio</title>
 	<link rel="icon" type="image/x-icon" href="site.ico">
-	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/theme.css">
 
   	<meta property="og:locale" content="ru_RU">
   	<meta property="og:locale:alternate" content="en_US">
   	<meta property="og:url" content="https://yushi4ka.github.io/">
   	<meta property="og:site_name" content="yushi4ka.github.io">
-  	<meta property="og:title" content="yushi4ka - Loader">
+  	<meta property="og:title" content="yushi4ka - Main">
   	<meta property="og:image" content="site.ico">
-  	<meta property="og:description" content="Привет, меня зовут Юшико. Я пишу Discord ботов а так же пишу плагины для Minecraft!">
+  	<meta property="og:description" content="Приветствую тебя! Меня зовут Юшико и я Discord Bot Developer">
 
   	<meta name="keywords" content="yushi4ka">
   	<meta name="author" content="yushi4ka">
 </head>
-<body>
-
-	<nav class="nav">
-		<div class="container">
-			<div class="nav-row">
-				<a href="index.html" class="logo"><strong>yushi4ka</strong></a>
-
-				<button class="dark-mode-btn">
-					<img src="img/icons/sun.svg" alt="Ligth mode" class="dark-mode-btn__icon">
-					<img src="img/icons/moon.svg" alt="Dark mode" class="dark-mode-btn__icon">
-				</button>
-			</div>
-		</div>
-	</nav>
-
-	<main class="section">
-		<div class="container">
-				<h1 class="title-1">Загрузка..</h1>
-		</div>
-	</main>
-
-	<footer class="footer">
-		<div class="container">
-			<div class="footer__wrapper">
-				<div class="copyright">
-					<p>© 2024 yushi4ka.github.io</p>
-				</div>
-			</div>
-		</div>
-	</footer>
-
-	<script type="module" src="js/loading.js"></script>
-	<script type="module" src="js/index.js"></script>
+<body class="dark-theme">
+    <div class="container">
+        <header>
+            <h1>yushi4ka</h1>
+            <p>Discord Bot Developer</p>
+        </header>
+        <section class="about">
+            <h2>Обо мне</h2>
+            <p>Привет меня зовут Юшико я разрабатываю ботов в Discord.</p>
+        </section>
+        <section class="projects">
+            <h2>Мои проекты</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="banner-container">
+                        <img class="banner" src="img/projects/01-banner.png" alt="Orion">
+                        <div class="logo_bg"></div>
+                        <img class="logo" src="img/projects/01-logo.png" alt="Orion">
+                    </div>
+                    <div class="project-info">
+                        <h3>Orion</h3>
+                        <p>Экономический Discord бот по игре Orion Online</p>
+                        <a href="https://discord.com/oauth2/authorize?client_id=1304515511215718451&permissions=414464863296&integration_type=0&scope=applications.commands+bot"  target="_blank">Добавить на сервер</a>
+                    </div>
+                </div>
+                <!-- Абоба -->
+            </div>
+        </section>
+        <footer>
+            <p>Для связи используйте <a href="https://discord.com/invite/WZFRBU47qX" target="_blank">Discord</a>.</p>
+        </footer>
+    </div>
+    <div class="theme-toggle" id="theme-toggle">
+        <img id="theme-icon" src="img/icons/moon.svg" alt="Переключить тему" width="24" height="24" class="theme-icon">
+    </div>
+    <script src="js/theme.js"></script>
 </body>
 </html>
