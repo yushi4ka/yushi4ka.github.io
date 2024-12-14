@@ -1,0 +1,75 @@
+* {
+    transition: background-color 1s ease, color 0.1s ease, border-color 1s ease;
+}
+
+body {
+    transition: background-color 1s ease, color 0.1s ease;
+}
+
+:root {
+    --border-color-light: #eaeaea;
+    --border-color-dark: #2c2f33;
+}
+
+body.dark-theme {
+    --border-color: var(--border-color-dark);
+}
+
+body.light-theme {
+    --border-color: var(--border-color-light);
+}
+
+body.dark-theme {
+    background-color: #2c2f33;
+    color: #ffffff;
+}
+
+body.dark-theme h1, 
+body.dark-theme h2, 
+body.dark-theme h3, 
+body.dark-theme a {
+    color: #a372da;
+}
+
+body.dark-theme h4, 
+body.dark-theme h5, 
+body.dark-theme h6 {
+    color: #a299b5;
+}
+
+body.light-theme {
+    background-color: #eaeaea;
+    color: #000000;
+}
+
+body.light-theme h1, 
+body.light-theme h2, 
+body.light-theme h3, 
+body.light-theme a {
+    color: #a372da;
+}
+
+body.light-theme h4, 
+body.light-theme h5, 
+body.light-theme h6 {
+    color: #555555;
+}
+
+.theme-icon {
+    transition: filter 1s ease;
+}
+
+body.dark-theme .theme-icon {
+    filter: brightness(0) invert(1);
+}
+
+body.light-theme .theme-icon {
+    filter: brightness(0) invert(0);
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 30px;
+    right: 25px;
+    z-index: 1000;
+}
