@@ -1,0 +1,25 @@
+.banner-container {
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.project-card img.banner {
+    background-color: rgb(255, 0, 0);
+    overflow: hidden;
+}
+
+.project-card img.logo {
+    background-color: rgb(255, 0, 0);
+    overflow: hidden;
+}
+
+img {
+    transition: opacity 1s ease;
+    opacity: 0;
+}
+
+.loaded img {
+    opacity: 1;
+}
