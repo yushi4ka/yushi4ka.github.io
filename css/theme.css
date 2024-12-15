@@ -57,6 +57,15 @@ body.light-theme h6 {
 
 .theme-icon {
     transition: filter 1s ease, opacity 0.5s ease;
+}
+
+body.dark-theme .theme-icon {
+    filter: brightness(0) invert(1);
+    opacity: 1;
+}
+
+body.light-theme .theme-icon {
+    filter: brightness(0) invert(0);
     opacity: 1;
 }
 
