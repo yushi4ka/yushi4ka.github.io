@@ -1,0 +1,130 @@
+* {
+    color: var(--f-color);
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.m-container {
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+}
+
+mark {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+
+    padding: 5px 5px;
+
+    font-family: monospace;
+    text-decoration: none;
+}
+
+#cursor-default {
+    cursor: default;
+}
+
+#cursor-link {
+    cursor: pointer;
+}
+
+/*  */
+
+.page-used {
+    font-size: 18px;
+    color: var(--primary-color);
+    position: relative;
+    animation: glow 1s ease-in-out infinite alternate;
+}
+
+.page-used::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 4px;
+    background-color: var(--primary-color);
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    border-radius: 10px;
+}
+
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 2px var(--primary-color), 0 0 4px var(--primary-color), 0 0 6px var(--primary-color);
+    }
+    100% {
+        text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 30px var(--primary-color);
+    }
+}
+
+.f-logo {
+    color: var(--text-color-p);
+}
+
+.f-nav-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.f-nav-container-info,
+.f-nav-container-policies {
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+}
+
+.f-p {
+    color: var(--text-color-p);
+}
+
+.f-a {
+    color: var(--text-color-a);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.f-a:hover {
+    text-decoration: underline;
+}
+
+a {
+    color: var(--text-color);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.h-a a {
+    color: var(--primary-color);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+button:hover {
+    background-color: var(--primary-color);
+    opacity: 0.8;
+}

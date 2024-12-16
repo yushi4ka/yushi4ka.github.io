@@ -1,0 +1,16 @@
+:root {
+    --bg-color: #2C2F33;
+    --bg-color-other: #34363a;
+    --card-bg-color: #34363a;
+
+    --primary-color: #7289DA;
+
+    --text-color: #FFFFFF;
+    --text-color-p: #999999;
+    --text-color-a: #777777;
+
+    --secondary-text-color: #B9BBBE;
+
+    --accent-green: #43B581;
+    --accent-red: #F04747;
+}

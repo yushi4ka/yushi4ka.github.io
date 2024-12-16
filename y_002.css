@@ -1,0 +1,29 @@
+.h {
+    background-color: var(--bg-color-other);
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.h-nav {
+    display: flex;
+}
+
+.h-nav-container a {
+    margin-left: 20px;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.f {
+    background-color: var(--bg-color-other);
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
