@@ -29,7 +29,17 @@ main {
     padding: 20px;
 }
 
-mark {
+.mark-date {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+
+    padding: 5px 5px;
+
+    font-family: monospace;
+    text-decoration: none;
+}
+
+.mark-utc {
     background-color: var(--primary-color);
     color: var(--text-color);
 
