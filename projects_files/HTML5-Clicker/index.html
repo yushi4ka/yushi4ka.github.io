@@ -1,164 +1,169 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-
-    <meta  charset="UTF-8">
-    <meta  name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta  name="author"  content="yushi4ka">
-    <link  rel="icon"  type="image/x-icon"  href="https://yushi4ka.github.io/projects_files/HTML5-Clicker/site.ico">
-    <title>Кликер</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="author" content="yushi4ka">
+    <link rel="icon" type="image/x-icon" href="https://yushi4ka.github.io/projects_files/HTML5-Clicker/site.ico">
     <title>Кликер</title>
     <style>
+        :root {
+            --primary-color: #ffaa00;
+            --bg-color: #222222;
+            --panel-color: #272727;
+            --text-color: #ffffff;
+            --border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            height: 100vh;
             margin: 0;
-            background-color: #222222;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             user-select: none;
-            transition: filter 0.3s ease;
+            overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        .blur-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            backdrop-filter: blur(5px);
-            z-index: 99;
-            display: none;
-        }
-
-        body.blurred .blur-background {
-            display: block;
-        }
-        
+        /* Основной контейнер игры */
         #game-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            flex: 1;
-            position: relative;
-        }
-        
-        #zone-title {
-            position: absolute;
-            top: 20px;
-            font-size: 50px;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        #pickaxe-selector {
-            position: absolute;
-            top: 80px;
-            left: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .pickaxe-icon {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            border: 3px solid rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        
-        .pickaxe-icon:hover {
-            transform: scale(1.1);
-        }
-        
-        .pickaxe-icon.selected {
-            border: 2px solid rgba(255, 217, 0, 0.2);
-            box-shadow: 0 0 10px gold;
-        }
-        
-        #shop-container {
-            width: 250px;
-            background-color: #272727;
-            border-top-left-radius: 50px;
-            box-shadow: 0 0px 8px rgba(0, 0, 0, 0.25);
             padding: 20px;
-            color: white;
-            overflow-y: auto;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            min-height: 100vh;
         }
-        
-        #shop-title {
-            font-size: 20px;
+
+        /* Заголовок зоны */
+        #zone-title {
+            font-size: clamp(24px, 5vw, 50px);
             font-weight: bold;
-            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
             text-align: center;
-            color: white;
         }
-        
-        .shop-item {
+
+        /* Кнопки меню (мобильные) */
+        .mobile-menu-button {
+            position: fixed;
+            bottom: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--panel-color);
+            border: 2px solid var(--border-color);
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 24px;
             display: flex;
             align-items: center;
-            padding: 10px;
-            margin-bottom: 10px;
-            background-color: #404040;
-            border-radius: 5px;
+            justify-content: center;
             cursor: pointer;
-            transition: all 0.2s;
+            z-index: 50;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
         }
-        
-        .shop-item.available:hover {
-            background-color: #505050;
-            box-shadow: 0 0px 10px rgba(255, 255, 255, 0.25);
-            transform: scale(1.05);
+
+        .mobile-menu-button:hover {
+            transform: scale(1.1);
         }
-        
-        .shop-item.unavailable {
-            opacity: 0.5;
-            cursor: not-allowed;
-            background-color: #333333;
+
+        #shop-button {
+            right: 20px;
         }
-        
-        .shop-item.owned {
-            background-color: #222222;
-            position: relative;
+
+        #pickaxes-button {
+            right: 90px;
         }
-        
-        .shop-item.owned .item-name {
-            text-decoration: line-through;
-            opacity: 0.7;
+
+        #news-button {
+            left: 20px;
         }
-        
-        .shop-item.owned::after {
-            content: "✅";
-            right: 18px;
-            color: #4CAF50;
-            font-size: 25px;
-            font-weight: bold;
+
+        /* Мобильное меню */
+        .mobile-menu {
+            position: fixed;
+            bottom: 90px;
+            width: calc(100% - 40px);
+            max-width: 400px;
+            max-height: 60vh;
+            background-color: var(--panel-color);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            z-index: 49;
+            transform: translateY(150%);
+            transition: transform 0.3s ease;
+            overflow-y: auto;
         }
-        
-        .item-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            margin-right: 10px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+
+        .mobile-menu.active {
+            transform: translateY(0);
         }
-        
-        .item-name {
-            flex: 1;
-            font-weight: bold;
+
+        /* Общие стили для магазина и селектора кирок */
+        #shop-container, #pickaxe-selector-container {
+            background-color: var(--panel-color);
+            border-radius: 15px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 300px;
         }
-        
-        .item-price {
-            color: #ffaa00;
-            font-weight: bold;
+
+        /* Только десктоп */
+        @media (min-width: 768px) {
+            #game-container {
+                flex-direction: row;
+                align-items: flex-start;
+                justify-content: center;
+                gap: 20px;
+                padding-top: 50px;
+            }
+
+            #zone-title {
+                position: absolute;
+                top: 10px;
+                width: 100%;
+                text-align: center;
+            }
+
+            #shop-container {
+                order: 1;
+                position: static;
+                transform: none;
+                max-height: 70vh;
+                overflow-y: auto;
+            }
+
+            #pickaxe-selector-container {
+                order: -1;
+                position: static;
+                transform: none;
+            }
+
+            .mobile-menu-button {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: none;
+            }
         }
-        
+
+        /* Зона клика */
         #click-zone {
-            width: 120px;
-            height: 120px;
+            width: clamp(100px, 30vw, 150px);
+            height: clamp(100px, 30vw, 150px);
             background-color: #8B4513;
             border-radius: 50%;
             display: flex;
@@ -168,123 +173,198 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.25);
-            border: 3px solid rgb(255, 255, 255, 0.2);
-            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border: 3px solid var(--border-color);
+            margin: 20px 0;
             user-select: none;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
         }
-        
+
         #click-zone.click-animation {
             animation: clickEffect 0.3s;
         }
-        
+
         @keyframes clickEffect {
             0% { transform: scale(1); }
             50% { transform: scale(0.9); }
             100% { transform: scale(1); }
         }
-        
+
+        /* Полоска HP */
         #hp-bar-container {
-            width: 150px;
-            height: 20px;
+            width: clamp(150px, 80%, 250px);
+            height: 25px;
             background-color: #b2332a;
             border-radius: 10px;
             overflow: hidden;
             margin-bottom: 20px;
             position: relative;
-            user-select: none;
             border: 3px solid rgba(0, 0, 0, 0.2);
-            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.15);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
-        
+
         #hp-bar {
             height: 100%;
             width: 100%;
             background-color: #e43c30;
             transition: width 0.3s;
         }
-        
+
         #hp-text {
             position: absolute;
             width: 100%;
             text-align: center;
-            line-height: 20px;
-            color: rgba(255, 255, 255, 0.75);
+            line-height: 25px;
+            color: rgba(255, 255, 255, 0.9);
             font-weight: bold;
-            z-index: 2; 
+            z-index: 2;
+            font-size: clamp(12px, 3vw, 16px);
         }
-        
+
+        /* Отображение монет */
         #coins {
-            font-size: 25px;
+            font-size: clamp(20px, 5vw, 30px);
             font-weight: bold;
-            margin-bottom: 20px;
-            user-select: none;
-            color: #ffaa00;
+            margin: 10px 0;
+            color: var(--primary-color);
+            text-align: center;
         }
-        
+
+        /* Анимация монет */
         .coin-animation {
             position: absolute;
-            font-size: 25px;
-            color: #ffaa00;
+            font-size: 20px;
+            color: var(--primary-color);
             font-weight: bold;
-            animation: coinFly 3s forwards;
+            animation: coinFly 1s forwards;
             pointer-events: none;
-            user-select: none;
+            z-index: 10;
         }
-        
+
         @keyframes coinFly {
             0% { transform: translateY(0); opacity: 1; }
             100% { transform: translateY(-50px); opacity: 0; }
         }
-        
-        #click-text {
-            font-weight: bold;
-            color: rgba(255, 255, 255, 0);
-        }
-        
+
+        /* Текущая кирка */
         #current-pickaxe {
-            margin-top: 20px;
-            font-size: 18px;
-            color: white;
+            margin: 20px 0;
+            font-size: clamp(16px, 4vw, 20px);
+            color: var(--text-color);
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-        
-        #pickaxe-color {
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            margin-right: 8px;
-            border: 1px solid rgb(255, 255, 255, 0.25);
+            flex-wrap: wrap;
+            text-align: center;
         }
 
-        #news-button {
+        #pickaxe-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 2px solid var(--border-color);
+        }
+
+        /* Магазин */
+        .shop-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #404040;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .shop-item.available:hover {
+            background-color: #505050;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .shop-item.unavailable {
+            opacity: 0.6;
+            cursor: not-allowed;
+            background-color: #333333;
+        }
+
+        .shop-item.owned {
+            background-color: #222222;
+            position: relative;
+        }
+
+        .shop-item.owned::after {
+            content: "✓";
             position: absolute;
-            bottom: 20px;
-            left: 20px;
+            right: 15px;
+            color: #4CAF50;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .item-color {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 2px solid var(--border-color);
+        }
+
+        .item-name {
+            flex: 1;
+            font-weight: bold;
+            font-size: clamp(14px, 3vw, 16px);
+        }
+
+        .item-price {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-left: 10px;
+            font-size: clamp(14px, 3vw, 16px);
+        }
+
+        /* Иконки кирок */
+        .pickaxe-icon {
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 3px solid rgba(255, 255, 255, 0.05);
-            color: rgba(255, 255, 255, 0.25);
-            font-weight: bold;
-            font-size: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border: 3px solid var(--border-color);
             cursor: pointer;
             transition: all 0.2s;
-            z-index: 10;
+            margin: 5px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
         }
 
-        #news-button:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: rgba(255, 255, 255, 0.75);
-            box-shadow: 0 0px 10px rgba(255, 255, 255, 0.25);
-            transform: scale(1.05);
+        .pickaxe-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .pickaxe-icon.selected {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        /* Новости */
+        .blur-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(5px);
+            z-index: 98;
+            display: none;
+        }
+
+        body.blurred .blur-background {
+            display: block;
         }
 
         #news-modal {
@@ -292,18 +372,20 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 400px;
-            max-width: 90%;
-            background-color: #303030;
-            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            background-color: var(--panel-color);
+            border-radius: 15px;
             padding: 20px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            z-index: 100;
+            z-index: 99;
             display: none;
+            overflow-y: auto;
         }
 
         #news-modal h2 {
-            color: #ffaa00;
+            color: var(--primary-color);
             margin-top: 0;
             text-align: center;
         }
@@ -325,7 +407,7 @@
         }
 
         #news-content {
-            color: white;
+            color: var(--text-color);
             line-height: 1.5;
         }
 
@@ -335,34 +417,36 @@
             right: 10px;
             background: none;
             border: none;
-            color: white;
-            font-size: 20px;
+            color: var(--text-color);
+            font-size: 24px;
             cursor: pointer;
         }
 
+        /* Уведомления */
         .notification-container {
             position: fixed;
             top: 20px;
             right: 20px;
-            width: 300px;
-            z-index: 1000;
+            width: 90%;
+            max-width: 300px;
+            z-index: 100;
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
         
         .notification {
-            background-color: #303030;
-            color: white;
+            background-color: var(--panel-color);
+            color: var(--text-color);
             padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            animation: slideIn 0.4s forwards, fadeOut 0.5s forwards 2.5s;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s forwards, fadeOut 0.5s forwards 2.5s;
             transform: translateX(100%);
             opacity: 0;
             position: relative;
             overflow: hidden;
-            border-left: 4px solid #ffaa00;
+            border-left: 4px solid var(--primary-color);
         }
         
         .notification.success {
@@ -380,7 +464,7 @@
         .notification-title {
             font-weight: bold;
             margin-bottom: 5px;
-            color: #ffaa00;
+            color: var(--primary-color);
         }
         
         .notification.success .notification-title {
@@ -404,13 +488,13 @@
             bottom: 0;
             left: 0;
             height: 3px;
-            background-color: rgba(255, 255, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.2);
             width: 100%;
         }
         
         .notification-progress-bar {
             height: 100%;
-            background-color: #ffaa00;
+            background-color: var(--primary-color);
             width: 100%;
             animation: progressBar 3s linear forwards;
         }
@@ -444,47 +528,70 @@
 <body>
     <div id="game-container">
         <div id="zone-title"><b>ZONE_NAME</b></div>
-        <div id="pickaxe-selector"></div>
-        <div id="coins">PLAYER_COINS</div>
+        
+        <!-- Основная игровая зона -->
         <div id="click-zone">
             <div id="click-text">КЛИК</div>
         </div>
+        
         <div id="hp-bar-container">
             <div id="hp-text">ZONE_HP</div>
             <div id="hp-bar"></div>
         </div>
+        
+        <div id="coins">PLAYER_COINS</div>
+        
         <div id="current-pickaxe">
             <div id="pickaxe-color" style="background-color: #8B4513"></div>
             <span>Деревянная Кирка (1⛏️)</span>
         </div>
+        
+        <!-- Десктоп версия магазина и кирок -->
+        <div id="shop-container" class="desktop-only">
+            <h2>Магазин</h2>
+            <div id="shop-items"></div>
+        </div>
+        
+        <div id="pickaxe-selector-container" class="desktop-only">
+            <h2>Ваши кирки</h2>
+            <div id="pickaxe-selector"></div>
+        </div>
+        
+        <!-- Мобильньные кнопки меню -->
+        <div id="shop-button" class="mobile-menu-button">🛒</div>
+        <div id="pickaxes-button" class="mobile-menu-button">⛏️</div>
+        <div id="news-button" class="mobile-menu-button">!</div>
+        
+        <!-- Мобильные меню -->
+        <div id="mobile-shop" class="mobile-menu">
+            <h2>Магазин</h2>
+            <div id="mobile-shop-items"></div>
+        </div>
+        
+        <div id="mobile-pickaxes" class="mobile-menu">
+            <h2>Ваши кирки</h2>
+            <div id="mobile-pickaxe-selector"></div>
+        </div>
     </div>
     
-    <div id="shop-container">
-        <div id="shop-title">Магазин</div>
-        <div id="shop-items"></div>
-    </div>
-
-    <div id="news-button">!</div>
-
+    <!-- Новости -->
     <div class="blur-background"></div>
-
     <div id="news-modal">
         <button id="close-news">×</button>
-        <h2>Новости Кликера</h2> <h3>v0.1.7</h3> 
+        <h2>Новости Кликера</h2>
+        <h3>v0.1.8</h3>
         <div id="news-content">
             <p>Добро пожаловать в игру!</p>
             <p>Последние обновления:</p>
             <ul>
-                <li><mark>v0.1.7</mark> <b>Обновлен</b> баланс инструментов и зон.</li>
-                <li><mark>v0.1.7</mark> <b>Улучшено</b> сохранение прогресса.</li>
-                <li><mark>v0.1.6</mark> <b>Добавлена</b> система оповещений.</li>
-                <li><mark>v0.1.5</mark> <b>Улучшено</b> меню магазина.</li>
-                <li><mark>v0.1.5</mark> <b>Обновлены</b> зоны и кирки.</li>
-                <li><mark>v0.1.4</mark> <b>Обновлены</b> инструмены и зоны.</li>
+                <li><mark>v0.1.8</mark> - <b>Добавлена</b> поддержка мобильных устройств.</li>
+                <li><mark>v0.1.6</mark> - <b>Обновлена</b> система сохранений.</li>
+                <li><mark>v0.1.6</mark> - <b>Добавлена</b> система уведомлений.</li>
             </ul>
         </div>
     </div>
-
+    
+    <!-- Уведомления -->
     <div class="notification-container" id="notification-container"></div>
 
     <script>
@@ -494,9 +601,16 @@
         const coinsDisplay = document.getElementById('coins');
         const zoneTitle = document.getElementById('zone-title');
         const shopItemsContainer = document.getElementById('shop-items');
+        const mobileShopItemsContainer = document.getElementById('mobile-shop-items');
         const pickaxeColor = document.getElementById('pickaxe-color');
         const currentPickaxeText = document.querySelector('#current-pickaxe span');
         const pickaxeSelector = document.getElementById('pickaxe-selector');
+        const mobilePickaxeSelector = document.getElementById('mobile-pickaxe-selector');
+
+        const shopButton = document.getElementById('shop-button');
+        const pickaxesButton = document.getElementById('pickaxes-button');
+        const mobileShop = document.getElementById('mobile-shop');
+        const mobilePickaxes = document.getElementById('mobile-pickaxes');
 
         const zoneslist = [
             { id: 1, maxHp: 15, coins: 1, name: "Каменная Зона", color: "#9E9E9E", pickaxeRequired: 0 },
@@ -516,6 +630,21 @@
             { id: 15, maxHp: 1500, coins: 60, name: "Солнечная Зона", color: "#FFD700", pickaxeRequired: 10 }
         ];
 
+        const pickaxes = [
+            { id: 0, name: "Деревянная Кирка", color: "#8B4513", damage: 1, price: 0 },
+            { id: 1, name: "Каменная Кирка", color: "#9E9E9E", damage: 2, price: 10, required: null },
+            { id: 2, name: "Медная Кирка", color: "#B87333", damage: 3, price: 20, required: 1 },
+            { id: 3, name: "Железная Кирка", color: "#A19D94", damage: 4, price: 40, required: 2 },
+            { id: 4, name: "Платиновая Кирка", color: "#C0C0C0", damage: 5, price: 60, required: 3 },
+            { id: 5, name: "Золотая Кирка", color: "#FFD700", damage: 6, price: 80, required: 4 },
+            { id: 6, name: "Алмазная Кирка", color: "#00BFFF", damage: 8, price: 100, required: 5 },
+            { id: 7, name: "Титановая Кирка", color: "#878681", damage: 12, price: 200, required: 6 },
+            { id: 8, name: "Мифриловая Кирка", color: "#5F9EA0", damage: 14, price: 300, required: 7 },
+            { id: 9, name: "Обсидиановая Кирка", color: "#2f0963", damage: 16, price: 400, required: 8 },       
+            { id: 10, name: "Лунная Кирка", color: "#C0C0E0", damage: 18, price: 600, required: 9 },
+            { id: 11, name: "Солнечная Кирка", color: "#FFD700", damage: 20, price: 1000, required: 10 }
+        ];
+
         const zoneTiers = [
             { minPickaxe: 0, maxPickaxe: 1, zones: [1] },
             { minPickaxe: 1, maxPickaxe: 2, zones: [1, 2, 3] },
@@ -529,28 +658,13 @@
             { minPickaxe: 10, maxPickaxe: 11, zones: [13, 14, 15] }
         ];
 
-        const pickaxes = [
-            { id: 0, name: "Деревянная Кирка", color: "#8B4513", damage: 1, price: 0 },
-            { id: 1, name: "Каменная Кирка", color: "#9E9E9E", damage: 2, price: 10, required: null },
-            { id: 2, name: "Медная Кирка", color: "#B87333", damage: 3, price: 20, required: 1 },
-            { id: 3, name: "Железная Кирка", color: "#A19D94", damage: 4, price: 40, required: 2 },
-            { id: 4, name: "Платиновая Кирка", color: "#C0C0C0", damage: 5, price: 60, required: 3 },
-            { id: 5, name: "Золотая Кирка", color: "#FFD700", damage: 6, price: 80, required: 4 },
-            { id: 6, name: "Алмазная Кирка", color: "#00BFFF", damage: 8, price: 100, required: 5 },
-            { id: 7, name: "Титановая Кирка", color: "#878681", damage: 12, price: 200, required: 7 },
-            { id: 8, name: "Мифриловая Кирка", color: "#5F9EA0", damage: 14, price: 300, required: 8 },
-            { id: 9, name: "Обсидиановая Кирка", color: "#2f0963", damage: 16, price: 400, required: 9 },       
-            { id: 10, name: "Лунная Кирка", color: "#C0C0E0", damage: 18, price: 600, required: 10 },
-            { id: 11, name: "Солнечная Кирка", color: "#FFD700", damage: 20, price: 1000, required: 11 }
-        ];
-        
         let currentZone = zoneslist[0];
         let hp = currentZone.maxHp;
         let maxHp = currentZone.maxHp;
         let coins = 0;
         let currentPickaxe = pickaxes[0];
         let ownedPickaxes = [0];
-        
+
         function generateToken() {
             const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
             let token = '';
@@ -626,7 +740,7 @@
             hpBar.style.width = `${percentage}%`;
             hpText.textContent = `${hp}/${maxHp} HP`;
         }
-        
+
         function spawnCoinAnimation(amount) {
             const coin = document.createElement('div');
             coin.className = 'coin-animation';
@@ -637,7 +751,7 @@
                 coin.remove();
             }, 1000);
         }
-        
+
         function getAvailableZones() {
             const currentTier = zoneTiers.find(tier => 
                 currentPickaxe.id >= tier.minPickaxe && 
@@ -687,37 +801,50 @@
             updateHpBar();
             saveGame();
         }
-        
+
         function updatePickaxeDisplay() {
             pickaxeColor.style.backgroundColor = currentPickaxe.color;
             currentPickaxeText.textContent = `${currentPickaxe.name} (${currentPickaxe.damage}⛏️)`;
             renderPickaxeSelector();
             saveGame();
         }
-        
+
         function renderPickaxeSelector() {
             pickaxeSelector.innerHTML = '';
+            mobilePickaxeSelector.innerHTML = '';
+            
             ownedPickaxes.forEach(pickaxeId => {
                 const pickaxe = pickaxes.find(p => p.id === pickaxeId);
                 if (pickaxe) {
-                    const icon = document.createElement('div');
-                    icon.className = `pickaxe-icon ${pickaxe.id === currentPickaxe.id ? 'selected' : ''}`;
-                    icon.style.backgroundColor = pickaxe.color;
-                    icon.title = `${pickaxe.name} (${pickaxe.damage}⛏️)`;
-                    
-                    icon.addEventListener('click', () => {
-                        if (pickaxe.id !== currentPickaxe.id) {
-                            currentPickaxe = pickaxe;
-                            updatePickaxeDisplay();
-                            resetClickZone();
-                        }
-                    });
-                    
+                    const icon = createPickaxeIcon(pickaxe);
                     pickaxeSelector.appendChild(icon);
+                    
+                    const mobileIcon = createPickaxeIcon(pickaxe);
+                    mobilePickaxeSelector.appendChild(mobileIcon);
                 }
             });
         }
-        
+
+        function createPickaxeIcon(pickaxe) {
+            const icon = document.createElement('div');
+            icon.className = `pickaxe-icon ${pickaxe.id === currentPickaxe.id ? 'selected' : ''}`;
+            icon.style.backgroundColor = pickaxe.color;
+            icon.title = `${pickaxe.name} (${pickaxe.damage}⛏️)`;
+            
+            icon.addEventListener('click', () => {
+                if (pickaxe.id !== currentPickaxe.id) {
+                    currentPickaxe = pickaxe;
+                    updatePickaxeDisplay();
+                    resetClickZone();
+                    if (window.innerWidth < 768) {
+                        mobilePickaxes.classList.remove('active');
+                    }
+                }
+            });
+            
+            return icon;
+        }
+
         function showNotification(title, message, type = 'info') {
             const container = document.getElementById('notification-container');
             const notification = document.createElement('div');
@@ -737,47 +864,60 @@
                 notification.remove();
             }, 3000);
         }
-        
+
         function renderShop() {
             shopItemsContainer.innerHTML = '';
+            mobileShopItemsContainer.innerHTML = '';
             
             pickaxes.slice(1).forEach(item => {
                 const canBuy = coins >= item.price && 
                             (item.required === null || ownedPickaxes.includes(item.required));
                 const isOwned = ownedPickaxes.includes(item.id);
                 
-                const shopItem = document.createElement('div');
-                shopItem.className = `shop-item ${isOwned ? 'owned' : (canBuy ? 'available' : 'unavailable')}`;
-                
-                shopItem.innerHTML = `
-                    <div class="item-color" style="background-color: ${item.color}"></div>
-                    <div class="item-name">${item.name} (${item.damage}⛏️)</div>
-                    ${isOwned ? '' : `<div class="item-price">${item.price}🪙</div>`}
-                `;
-                
-                if (canBuy && !isOwned) {
-                    shopItem.addEventListener('click', () => {
-                        coins -= item.price;
-                        coinsDisplay.textContent = `${coins}🪙`;
-                        ownedPickaxes.push(item.id);
-                        currentPickaxe = item;
-                        
-                        showNotification(
-                            'Покупка', 
-                            `Куплена ${item.name} за ${item.price}🪙.`, 
-                            'success'
-                        );
-                        
-                        updatePickaxeDisplay();
-                        renderShop();
-                        resetClickZone();
-                    });
-                }
-                
+                const shopItem = createShopItem(item, canBuy, isOwned);
                 shopItemsContainer.appendChild(shopItem);
+                
+                const mobileShopItem = createShopItem(item, canBuy, isOwned);
+                mobileShopItemsContainer.appendChild(mobileShopItem);
             });
         }
-        
+
+        function createShopItem(item, canBuy, isOwned) {
+            const shopItem = document.createElement('div');
+            shopItem.className = `shop-item ${isOwned ? 'owned' : (canBuy ? 'available' : 'unavailable')}`;
+            
+            shopItem.innerHTML = `
+                <div class="item-color" style="background-color: ${item.color}"></div>
+                <div class="item-name">${item.name} (${item.damage}⛏️)</div>
+                ${isOwned ? '' : `<div class="item-price">${item.price}🪙</div>`}
+            `;
+            
+            if (canBuy && !isOwned) {
+                shopItem.addEventListener('click', () => {
+                    coins -= item.price;
+                    coinsDisplay.textContent = `${coins}🪙`;
+                    ownedPickaxes.push(item.id);
+                    currentPickaxe = item;
+                    
+                    showNotification(
+                        'Покупка', 
+                        `Куплена ${item.name} за ${item.price}🪙`, 
+                        'success'
+                    );
+                    
+                    updatePickaxeDisplay();
+                    renderShop();
+                    resetClickZone();
+                    
+                    if (window.innerWidth < 768) {
+                        mobileShop.classList.remove('active');
+                    }
+                });
+            }
+            
+            return shopItem;
+        }
+
         clickZone.addEventListener('click', (e) => {
             clickZone.classList.add('click-animation');
             setTimeout(() => {
@@ -796,6 +936,25 @@
             }
             
             saveGame();
+        });
+
+        shopButton.addEventListener('click', () => {
+            mobileShop.classList.toggle('active');
+            mobilePickaxes.classList.remove('active');
+        });
+
+        pickaxesButton.addEventListener('click', () => {
+            mobilePickaxes.classList.toggle('active');
+            mobileShop.classList.remove('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!mobileShop.contains(e.target) && e.target !== shopButton) {
+                mobileShop.classList.remove('active');
+            }
+            if (!mobilePickaxes.contains(e.target) && e.target !== pickaxesButton) {
+                mobilePickaxes.classList.remove('active');
+            }
         });
 
         const newsButton = document.getElementById('news-button');
@@ -820,7 +979,7 @@
             }
         });
 
-        setInterval(saveGame, 30000);
+        setInterval(saveGame, 60000);
 
         window.addEventListener('beforeunload', saveGame);
 
@@ -838,9 +997,33 @@
             resetClickZone();
             renderShop();
             coinsDisplay.textContent = `${coins}🪙`;
+            
+            if (window.innerWidth < 768) {
+                document.getElementById('shop-container').style.display = 'none';
+                document.getElementById('pickaxe-selector-container').style.display = 'none';
+            } else {
+                mobileShop.style.display = 'none';
+                mobilePickaxes.style.display = 'none';
+            }
         }
 
         window.addEventListener('load', initGame);
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth < 768) {
+                document.getElementById('shop-container').style.display = 'none';
+                document.getElementById('pickaxe-selector-container').style.display = 'none';
+                mobileShop.style.display = 'block';
+                mobilePickaxes.style.display = 'block';
+            } else {
+                document.getElementById('shop-container').style.display = 'block';
+                document.getElementById('pickaxe-selector-container').style.display = 'block';
+                mobileShop.style.display = 'none';
+                mobilePickaxes.style.display = 'none';
+                mobileShop.classList.remove('active');
+                mobilePickaxes.classList.remove('active');
+            }
+        });
     </script>
 
 </body>
