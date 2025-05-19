@@ -383,18 +383,29 @@
             { id: 6, maxHp: 60, coins: 6, name: "Золотая Зона", color: "#FFD700", pickaxeRequired: 3 },
             { id: 7, maxHp: 80, coins: 8, name: "Алмазная Зона", color: "#00BFFF", pickaxeRequired: 4 },
             { id: 8, maxHp: 100, coins: 10, name: "Изумрудная Зона", color: "#50C878", pickaxeRequired: 5 },
-            { id: 9, maxHp: 150, coins: 12, name: "Рубиновая Зона", color: "#E0115F", pickaxeRequired: 6 }
+            { id: 9, maxHp: 150, coins: 12, name: "Рубиновая Зона", color: "#E0115F", pickaxeRequired: 6 },
+            { id: 10, maxHp: 200, coins: 15, name: "Сапфировая Зона", color: "#0F52BA", pickaxeRequired: 7 },
+            { id: 11, maxHp: 250, coins: 18, name: "Титановая Зона", color: "#878681", pickaxeRequired: 8 },
+            { id: 12, maxHp: 300, coins: 22, name: "Мифриловая Зона", color: "#5F9EA0", pickaxeRequired: 9 },
+            { id: 13, maxHp: 400, coins: 30, name: "Обсидиановая Зона", color: "#3D2B1F", pickaxeRequired: 10 },
+            { id: 14, maxHp: 500, coins: 40, name: "Лунная Зона", color: "#C0C0E0", pickaxeRequired: 11 },
+            { id: 15, maxHp: 750, coins: 60, name: "Солнечная Зона", color: "#FFD700", pickaxeRequired: 12 }
         ];
 
         const pickaxes = [
             { id: 0, name: "Деревянная Кирка", color: "#8B4513", damage: 1, price: 0 },
             { id: 1, name: "Каменная Кирка", color: "#9E9E9E", damage: 2, price: 10, required: null },
             { id: 2, name: "Медная Кирка", color: "#B87333", damage: 3, price: 20, required: 1 },
-            { id: 3, name: "Железная Кирка", color: "#A19D94", damage: 4, price: 30, required: 2 },
-            { id: 4, name: "Серебрянная Кирка", color: "#C0C0C0", damage: 5, price: 40, required: 3 },
-            { id: 5, name: "Платиновая Кирка", color: "#E5E4E2", damage: 6, price: 50, required: 4 },
-            { id: 6, name: "Золотая Кирка", color: "#FFD700", damage: 8, price: 60, required: 5 },
-            { id: 7, name: "Алмазная Кирка", color: "#00BFFF", damage: 10, price: 70, required: 6 }
+            { id: 3, name: "Железная Кирка", color: "#A19D94", damage: 4, price: 40, required: 2 },
+            { id: 4, name: "Платиновая Кирка", color: "#E5E4E2", damage: 5, price: 60, required: 3 },
+            { id: 5, name: "Золотая Кирка", color: "#FFD700", damage: 8, price: 80, required: 4 },
+            { id: 6, name: "Алмазная Кирка", color: "#00BFFF", damage: 10, price: 100, required: 5 },
+            { id: 7, name: "Сапфировая Кирка", color: "#0F52BA", damage: 12, price: 150, required: 6 },
+            { id: 8, name: "Титановая Кирка", color: "#878681", damage: 15, price: 200, required: 7 },
+            { id: 9, name: "Мифриловая Кирка", color: "#5F9EA0", damage: 18, price: 300, required: 8 },
+            { id: 10, name: "Обсидиановая Кирка", color: "#3D2B1F", damage: 22, price: 400, required: 9 },
+            { id: 11, name: "Лунная Кирка", color: "#C0C0E0", damage: 27, price: 600, required: 10 },
+            { id: 12, name: "Солнечная Кирка", color: "#FFD700", damage: 35, price: 1000, required: 11 }
         ];
         
         let currentZone = zoneslist[0];
@@ -476,7 +487,20 @@
         }
         
         function getAvailableZones() {
-            return zoneslist.filter(zone => zone.pickaxeRequired <= currentPickaxe.id);
+            const availableZones = zoneslist.filter(zone => zone.pickaxeRequired <= currentPickaxe.id);
+            
+            const zoneGroups = [];
+            for (let i = 0; i < availableZones.length; i += 3) {
+                zoneGroups.push(availableZones.slice(i, i + 3));
+            }
+            
+            const pickaxeGroup = Math.floor(currentPickaxe.id / 3);
+            
+            if (zoneGroups[pickaxeGroup]) {
+                return zoneGroups[pickaxeGroup];
+            }
+            
+            return zoneGroups[zoneGroups.length - 1] || availableZones;
         }
         
         function getRandomZone() {
@@ -511,7 +535,7 @@
                     const icon = document.createElement('div');
                     icon.className = `pickaxe-icon ${pickaxe.id === currentPickaxe.id ? 'selected' : ''}`;
                     icon.style.backgroundColor = pickaxe.color;
-                    icon.title = `${pickaxe.name} (${pickaxe.damage}⚔️)`;
+                    icon.title = `${pickaxe.name} (${currentPickaxe.damage}⚔️)`;
                     
                     icon.addEventListener('click', () => {
                         if (pickaxe.id !== currentPickaxe.id) {
