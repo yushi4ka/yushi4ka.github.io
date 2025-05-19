@@ -1,0 +1,108 @@
+@media (max-width: 767px) {
+    body {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    #game-container {
+        height: auto;
+        min-height: 100vh;
+        padding: 20px;
+    }
+
+    #zone-title {
+        position: static;
+        font-size: clamp(30px, 5vw, 50px);
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    #pickaxe-selector-container.desktop-only {
+        display: none;
+    }
+
+    #shop-container.desktop-only {
+        display: none;
+    }
+
+    #click-zone {
+        width: clamp(100px, 30vw, 150px);
+        height: clamp(100px, 30vw, 150px);
+    }
+
+    #hp-bar-container {
+        width: clamp(150px, 80%, 250px);
+        height: 25px;
+    }
+
+    #coins {
+        font-size: clamp(20px, 5vw, 30px);
+    }
+
+    #current-pickaxe {
+        font-size: clamp(16px, 4vw, 20px);
+    }
+
+    .mobile-menu-button {
+        position: fixed;
+        bottom: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: var(--panel-color);
+        border: 2px solid var(--border-color);
+        color: var(--primary-color);
+        font-weight: bold;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 50;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s;
+    }
+
+    #shop-button {
+        right: 20px;
+    }
+
+    #pickaxes-button {
+        right: 90px;
+    }
+
+    #news-button {
+        left: 20px;
+    }
+
+    .mobile-menu {
+        position: fixed;
+        bottom: 90px;
+        width: calc(100% - 40px);
+        max-width: 400px;
+        max-height: 60vh;
+        background-color: var(--panel-color);
+        border-radius: 15px;
+        padding: 15px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        z-index: 49;
+        transform: translateY(150%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+    }
+
+    .mobile-menu.active {
+        transform: translateY(0);
+    }
+
+    #pickaxe-selector {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    #news-modal {
+        width: 90%;
+    }
+}

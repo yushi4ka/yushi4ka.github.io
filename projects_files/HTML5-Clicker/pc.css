@@ -1,0 +1,106 @@
+@media (min-width: 768px) {
+    body {
+        display: flex;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    #game-container {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 100vh;
+    }
+
+    #game-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    #zone-title {
+        position: absolute;
+        top: 20px;
+        font-size: 50px;
+    }
+
+    #pickaxe-selector-container.desktop-only {
+        position: absolute;
+        top: 100px;
+        left: 20px;
+        background-color: var(--panel-color);
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        z-index: 10;
+    }
+
+    #pickaxe-selector {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #shop-container.desktop-only {
+        border-left: 1px solid var(--border-color);
+        width: 250px;
+        background-color: var(--panel-color);
+        border-top-left-radius: 50px;
+        box-shadow: 0 0px 10px rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        color: white;
+        overflow-y: auto;
+    }
+
+    #news-button {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.05);
+        border: 3px solid rgba(255, 255, 255, 0.05);
+        color: rgba(255, 255, 255, 0.25);
+        font-weight: bold;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s;
+        z-index: 10;
+    }
+
+    #news-button:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.75);
+        box-shadow: 0 0px 10px rgba(255, 255, 255, 0.25);
+        transform: scale(1.05);
+    }
+
+    #news-modal {
+        width: 400px;
+    }
+
+    .mobile-menu-button, .mobile-menu {
+        display: none !important;
+    }
+
+    #hp-bar-container {
+        width: 150px;
+        height: 20px;
+    }
+
+    #coins {
+        font-size: 25px;
+    }
+
+    #current-pickaxe {
+        font-size: 18px;
+    }
+}
