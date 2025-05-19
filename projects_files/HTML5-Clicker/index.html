@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+    <meta  charset="UTF-8">
+    <meta  name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta  name="author"  content="yushi4ka">
+    <link  rel="icon"  type="image/x-icon"  href="https://yushi4ka.github.io/projects_files/HTML5-Clicker/site.ico">
+    <title>Кликер</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            margin: 0;
+            background-color: #222222;
+            user-select: none;
+            transition: filter 0.3s ease;
+        }
+
+        .blur-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(5px);
+            z-index: 99;
+            display: none;
+        }
+
+        body.blurred .blur-background {
+            display: block;
+        }
+        
+        #game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            position: relative;
+        }
+        
+        #zone-title {
+            position: absolute;
+            top: 20px;
+            font-size: 50px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        #pickaxe-selector {
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .pickaxe-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .pickaxe-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        .pickaxe-icon.selected {
+            border: 2px solid rgba(255, 217, 0, 0.2);
+            box-shadow: 0 0 10px gold;
+        }
+        
+        #shop-container {
+            width: 250px;
+            background-color: #272727;
+            border-top-left-radius: 50px;
+            padding: 20px;
+            color: white;
+            overflow-y: auto;
+        }
+        
+        #shop-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+            color: white;
+        }
+        
+        .shop-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #353535;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .shop-item.available:hover {
+            background-color: #454545;
+            transform: scale(1.05);
+        }
+        
+        .shop-item.unavailable {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: #333333;
+        }
+        
+        .item-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .item-name {
+            flex: 1;
+            font-weight: bold;
+        }
+        
+        .item-price {
+            color: #ffaa00;
+            font-weight: bold;
+        }
+        
+        #click-zone {
+            width: 120px;
+            height: 120px;
+            background-color: #8B4513;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.25);
+            border: 3px solid rgb(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+            user-select: none;
+            transition: background-color 0.3s;
+        }
+        
+        #click-zone.click-animation {
+            animation: clickEffect 0.3s;
+        }
+        
+        @keyframes clickEffect {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+        
+        #hp-bar-container {
+            width: 150px;
+            height: 20px;
+            background-color: #b2332a;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+            user-select: none;
+            border: 3px solid rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.15);
+        }
+        
+        #hp-bar {
+            height: 100%;
+            width: 100%;
+            background-color: #e43c30;
+            transition: width 0.3s;
+        }
+        
+        #hp-text {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            line-height: 20px;
+            color: white;
+            font-weight: bold;
+            z-index: 2; 
+        }
+        
+        #coins {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            user-select: none;
+            color: #ffaa00;
+        }
+        
+        .coin-animation {
+            position: absolute;
+            font-size: 20px;
+            color: #ffaa00;
+            font-weight: bold;
+            animation: coinFly 3s forwards;
+            pointer-events: none;
+            user-select: none;
+        }
+        
+        @keyframes coinFly {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-50px); opacity: 0; }
+        }
+        
+        #click-text {
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0);
+        }
+        
+        #current-pickaxe {
+            margin-top: 20px;
+            font-size: 18px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #pickaxe-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 8px;
+            border: 1px solid rgb(255, 255, 255, 0.25);
+        }
+
+        #news-button {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 3px solid rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.25);
+            font-weight: bold;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            z-index: 10;
+        }
+
+        #news-button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.75);
+            transform: scale(1.05);
+        }
+
+        #news-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            max-width: 90%;
+            background-color: #303030;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            display: none;
+        }
+
+        #news-modal h2 {
+            color: #ffaa00;
+            margin-top: 0;
+            text-align: center;
+        }
+
+        #news-modal h3 {
+            color: #909090;
+            margin-top: 0;
+            text-align: center;
+        }
+
+        #news-modal mark {
+            background-color: #272727;
+            color: #cccccc;
+
+            border-radius: 5px;
+            border: 2px solid rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+            margin-top: 0;
+            text-align: center;
+        }
+
+        #news-content {
+            color: white;
+            line-height: 1.5;
+        }
+
+        #close-news {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div id="zone-title"><b>Деревянная Зона</b></div>
+        <div id="pickaxe-selector"></div>
+        <div id="coins">0🪙</div>
+        <div id="click-zone">
+            <div id="click-text">КЛИК</div>
+        </div>
+        <div id="hp-bar-container">
+            <div id="hp-text">10/10 HP</div>
+            <div id="hp-bar"></div>
+        </div>
+        <div id="current-pickaxe">
+            <div id="pickaxe-color" style="background-color: #8B4513"></div>
+            <span>Деревянная Кирка (1⚔️)</span>
+        </div>
+    </div>
+    
+    <div id="shop-container">
+        <div id="shop-title">Магазин</div>
+        <div id="shop-items"></div>
+    </div>
+
+    <div id="news-button">!</div>
+
+    <div class="blur-background"></div>
+
+    <div id="news-modal">
+        <button id="close-news">×</button>
+        <h2>Новости Кликера</h2> <h3>v0.1.3</h3> 
+        <div id="news-content">
+            <p>Добро пожаловать в игру!</p>
+            <p>Последние обновления:</p>
+            <ul>
+                <li><mark>v0.0.9</mark> <b>Добавлены</b> новые зоны и кирки.</li>
+                <li><mark>v0.1.0</mark> <b>Улучшена</b> система магазина.</li>
+                <li><mark>v0.1.2</mark> <b>Добавлена</b> панель выбора кирок.</li>
+                <li><mark>v0.1.3</mark> <b>Добавлено</b> сохранение прогресса.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const clickZone = document.getElementById('click-zone');
+        const hpBar = document.getElementById('hp-bar');
+        const hpText = document.getElementById('hp-text');
+        const coinsDisplay = document.getElementById('coins');
+        const zoneTitle = document.getElementById('zone-title');
+        const shopItemsContainer = document.getElementById('shop-items');
+        const pickaxeColor = document.getElementById('pickaxe-color');
+        const currentPickaxeText = document.querySelector('#current-pickaxe span');
+        const pickaxeSelector = document.getElementById('pickaxe-selector');
+
+        const zoneslist = [
+            { id: 1, maxHp: 10, coins: 1, name: "Каменная Зона", color: "#9E9E9E", pickaxeRequired: 0 },
+            { id: 2, maxHp: 20, coins: 2, name: "Медная Зона", color: "#B87333", pickaxeRequired: 0 },
+            { id: 3, maxHp: 25, coins: 2, name: "Оловянная Зона", color: "#7F7F7F", pickaxeRequired: 1 },
+            { id: 4, maxHp: 30, coins: 4, name: "Железная Зона", color: "#A19D94", pickaxeRequired: 2 },
+            { id: 5, maxHp: 40, coins: 4, name: "Серебряная Зона", color: "#C0C0C0", pickaxeRequired: 3 },
+            { id: 6, maxHp: 60, coins: 6, name: "Золотая Зона", color: "#FFD700", pickaxeRequired: 3 },
+            { id: 7, maxHp: 80, coins: 8, name: "Алмазная Зона", color: "#00BFFF", pickaxeRequired: 4 },
+            { id: 8, maxHp: 100, coins: 10, name: "Изумрудная Зона", color: "#50C878", pickaxeRequired: 5 },
+            { id: 9, maxHp: 150, coins: 12, name: "Рубиновая Зона", color: "#E0115F", pickaxeRequired: 6 }
+        ];
+
+        const pickaxes = [
+            { id: 0, name: "Деревянная Кирка", color: "#8B4513", damage: 1, price: 0 },
+            { id: 1, name: "Каменная Кирка", color: "#9E9E9E", damage: 2, price: 10, required: null },
+            { id: 2, name: "Медная Кирка", color: "#B87333", damage: 3, price: 20, required: 1 },
+            { id: 3, name: "Железная Кирка", color: "#A19D94", damage: 4, price: 30, required: 2 },
+            { id: 4, name: "Серебрянная Кирка", color: "#C0C0C0", damage: 5, price: 40, required: 3 },
+            { id: 5, name: "Платиновая Кирка", color: "#E5E4E2", damage: 6, price: 50, required: 4 },
+            { id: 6, name: "Золотая Кирка", color: "#FFD700", damage: 8, price: 60, required: 5 },
+            { id: 7, name: "Алмазная Кирка", color: "#00BFFF", damage: 10, price: 70, required: 6 }
+        ];
+        
+        let currentZone = zoneslist[0];
+        let hp = currentZone.maxHp;
+        let maxHp = currentZone.maxHp;
+        let coins = 0;
+        let currentPickaxe = pickaxes[0];
+        let ownedPickaxes = [0];
+        
+        function generateToken() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let token = '';
+            for (let i = 0; i < 27; i++) {
+                token += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return token;
+        }
+
+        function saveGame() {
+            const gameData = {
+                coins: coins,
+                currentPickaxeId: currentPickaxe.id,
+                ownedPickaxes: ownedPickaxes,
+                currentZoneId: currentZone.id,
+                hp: hp,
+                maxHp: maxHp
+            };
+            
+            const html5ClickerData = JSON.parse(localStorage.getItem('HTML5Clicker')) || {};
+            
+            if (!html5ClickerData.token) {
+                html5ClickerData.token = generateToken();
+            }
+            
+            html5ClickerData.gameData = gameData;
+            
+            localStorage.setItem('HTML5Clicker', JSON.stringify(html5ClickerData));
+        }
+
+        function loadGame() {
+            const savedData = localStorage.getItem('HTML5Clicker');
+            if (!savedData) return false;
+            
+            try {
+                const html5ClickerData = JSON.parse(savedData);
+                const gameData = html5ClickerData.gameData;
+                
+                if (!gameData) return false;
+                
+                coins = gameData.coins || 0;
+                currentPickaxe = pickaxes.find(p => p.id === gameData.currentPickaxeId) || pickaxes[0];
+                ownedPickaxes = gameData.ownedPickaxes || [0];
+                currentZone = zoneslist.find(z => z.id === gameData.currentZoneId) || zoneslist[0];
+                hp = gameData.hp || currentZone.maxHp;
+                maxHp = gameData.maxHp || currentZone.maxHp;
+                
+                return true;
+            } catch (e) {
+                console.error('Ошибка загрузки игры', e);
+                return false;
+            }
+        }
+
+        function updateHpBar() {
+            const percentage = (hp / maxHp) * 100;
+            hpBar.style.width = `${percentage}%`;
+            hpText.textContent = `${hp}/${maxHp} HP`;
+        }
+        
+        function spawnCoinAnimation(amount) {
+            const coin = document.createElement('div');
+            coin.className = 'coin-animation';
+            coin.textContent = `+${amount}🪙`;
+            clickZone.appendChild(coin);
+            
+            setTimeout(() => {
+                coin.remove();
+            }, 1000);
+        }
+        
+        function getAvailableZones() {
+            return zoneslist.filter(zone => zone.pickaxeRequired <= currentPickaxe.id);
+        }
+        
+        function getRandomZone() {
+            const availableZones = getAvailableZones();
+            return availableZones[Math.floor(Math.random() * availableZones.length)];
+        }
+        
+        function resetClickZone() {
+            currentZone = getRandomZone();
+            hp = currentZone.maxHp;
+            maxHp = currentZone.maxHp;
+            
+            clickZone.style.backgroundColor = currentZone.color;
+            zoneTitle.textContent = currentZone.name;
+            zoneTitle.style.color = currentZone.color;
+            updateHpBar();
+            saveGame();
+        }
+        
+        function updatePickaxeDisplay() {
+            pickaxeColor.style.backgroundColor = currentPickaxe.color;
+            currentPickaxeText.textContent = `${currentPickaxe.name} (${currentPickaxe.damage}⚔️)`;
+            renderPickaxeSelector();
+            saveGame();
+        }
+        
+        function renderPickaxeSelector() {
+            pickaxeSelector.innerHTML = '';
+            ownedPickaxes.forEach(pickaxeId => {
+                const pickaxe = pickaxes.find(p => p.id === pickaxeId);
+                if (pickaxe) {
+                    const icon = document.createElement('div');
+                    icon.className = `pickaxe-icon ${pickaxe.id === currentPickaxe.id ? 'selected' : ''}`;
+                    icon.style.backgroundColor = pickaxe.color;
+                    icon.title = `${pickaxe.name} (${pickaxe.damage}⚔️)`;
+                    
+                    icon.addEventListener('click', () => {
+                        if (pickaxe.id !== currentPickaxe.id) {
+                            currentPickaxe = pickaxe;
+                            updatePickaxeDisplay();
+                            resetClickZone();
+                        }
+                    });
+                    
+                    pickaxeSelector.appendChild(icon);
+                }
+            });
+        }
+        
+        function renderShop() {
+            shopItemsContainer.innerHTML = '';
+            pickaxes.slice(1).forEach(item => {
+                const canBuy = coins >= item.price && 
+                            (item.required === null || ownedPickaxes.includes(item.required));
+                const isOwned = ownedPickaxes.includes(item.id);
+                
+                const shopItem = document.createElement('div');
+                shopItem.className = `shop-item ${canBuy && !isOwned ? 'available' : 'unavailable'}`;
+                shopItem.innerHTML = `
+                    <div class="item-color" style="background-color: ${item.color}"></div>
+                    <div class="item-name">${item.name} (${item.damage}⚔️)</div>
+                    <div class="item-price">${item.price}🪙</div>
+                `;
+                
+                if (canBuy && !isOwned) {
+                    shopItem.addEventListener('click', () => {
+                        coins -= item.price;
+                        coinsDisplay.textContent = `${coins}🪙`;
+                        ownedPickaxes.push(item.id);
+                        currentPickaxe = item;
+                        updatePickaxeDisplay();
+                        renderShop();
+                        resetClickZone();
+                    });
+                }
+                
+                shopItemsContainer.appendChild(shopItem);
+            });
+        }
+        
+        clickZone.addEventListener('click', (e) => {
+            clickZone.classList.add('click-animation');
+            setTimeout(() => {
+                clickZone.classList.remove('click-animation');
+            }, 300);
+            
+            hp -= currentPickaxe.damage;
+            updateHpBar();
+            
+            if (hp <= 0) {
+                coins += currentZone.coins;
+                coinsDisplay.textContent = `${coins}🪙`;
+                spawnCoinAnimation(currentZone.coins);
+                renderShop();
+                resetClickZone();
+            }
+        });
+
+        const newsButton = document.getElementById('news-button');
+        const newsModal = document.getElementById('news-modal');
+        const closeNews = document.getElementById('close-news');
+        const blurBackground = document.querySelector('.blur-background');
+
+        newsButton.addEventListener('click', () => {
+            document.body.classList.add('blurred');
+            newsModal.style.display = 'block';
+        });
+
+        closeNews.addEventListener('click', () => {
+            document.body.classList.remove('blurred');
+            newsModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === blurBackground) {
+                document.body.classList.remove('blurred');
+                newsModal.style.display = 'none';
+            }
+        });
+
+        setInterval(saveGame, 30000);
+
+        window.addEventListener('beforeunload', saveGame);
+
+        function initGame() {
+            if (!loadGame()) {
+                currentZone = zoneslist[0];
+                hp = currentZone.maxHp;
+                maxHp = currentZone.maxHp;
+                coins = 0;
+                currentPickaxe = pickaxes[0];
+                ownedPickaxes = [0];
+            }
+            
+            updatePickaxeDisplay();
+            resetClickZone();
+            renderShop();
+            coinsDisplay.textContent = `${coins}🪙`;
+        }
+
+        window.addEventListener('load', initGame);
+    </script>
+</body>
+</html>
